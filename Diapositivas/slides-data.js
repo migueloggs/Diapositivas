@@ -12,7 +12,8 @@ const slides = [
         title: "Fundamentos de Matemáticas",
         subtitle: "Conceptos Esenciales y Aplicaciones",
         author: "Presentación Educativa",
-        description: "Una exploración completa de los principios fundamentales de la matemática"
+        description: "Una exploración completa de los principios fundamentales de la matemática",
+        course: "10° Grado"
     },
     {
         // Diapositiva 2: Álgebra Básica
@@ -20,6 +21,7 @@ const slides = [
         type: "content",
         title: "Álgebra Básica",
         subtitle: "Ecuaciones Lineales",
+        course: "10° Grado",
         content: `
             <p>Las ecuaciones lineales son expresiones matemáticas que relacionan variables de primer grado.</p>
             
@@ -45,6 +47,7 @@ const slides = [
         type: "content",
         title: "Funciones Cuadráticas",
         subtitle: "Parábolas y Raíces",
+        course: "10° Grado",
         content: `
             <p>Una función cuadrática es una función polinómica de grado 2:</p>
             
@@ -71,6 +74,7 @@ const slides = [
         type: "content",
         title: "Geometría",
         subtitle: "Áreas y Perímetros",
+        course: "10° Grado",
         content: `
             <p>Las fórmulas geométricas nos permiten calcular propiedades de figuras:</p>
             
@@ -96,6 +100,7 @@ const slides = [
         type: "content",
         title: "Trigonometría",
         subtitle: "Razones Trigonométricas",
+        course: "10° Grado",
         content: `
             <p>Las razones trigonométricas relacionan los ángulos con los lados de un triángulo rectángulo:</p>
             
@@ -119,6 +124,7 @@ const slides = [
         type: "content",
         title: "Cálculo Diferencial",
         subtitle: "Derivadas",
+        course: "10° Grado",
         content: `
             <p>La derivada mide cómo cambia una función respecto a la variable independiente:</p>
             
@@ -141,6 +147,7 @@ const slides = [
         type: "content",
         title: "Cálculo Integral",
         subtitle: "Antiderivadas y Área",
+        course: "10° Grado",
         content: `
             <p>La integral es la operación inversa de la derivación:</p>
             
@@ -171,6 +178,7 @@ const slides = [
         type: "content",
         title: "Álgebra Lineal",
         subtitle: "Matrices y Determinantes",
+        course: "10° Grado",
         content: `
             <p>Las matrices son arreglos rectangulares de números:</p>
             
@@ -197,6 +205,7 @@ const slides = [
         type: "content",
         title: "Probabilidad y Estadística",
         subtitle: "Distribuciones y Variables Aleatorias",
+        course: "10° Grado",
         content: `
             <p>La probabilidad mide la ocurrencia de eventos aleatorios:</p>
             
@@ -225,6 +234,7 @@ const slides = [
         type: "content",
         title: "Números Complejos",
         subtitle: "Forma Rectangular y Polar",
+        course: "10° Grado",
         content: `
             <p>Los números complejos extienden los números reales con la unidad imaginaria $i$ donde $i^2 = -1$:</p>
             

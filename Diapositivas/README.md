@@ -11,12 +11,17 @@ Una aplicación web moderna y educativa para presentaciones de diapositivas con 
 - ✅ **Barra de progreso** visual
 - ✅ **Contador de diapositivas** (actual / total)
 - ✅ **Pantalla completa** (F o botón)
+- ✅ **Cambio de tema** (claro/oscuro) con botón y almacenamiento
+- ✅ **Sección superior en cada diapositiva** con:
+  - Logo del colegio (ajustable)
+  - Nombre del colegio (personalizable)
+  - Nombre del curso
 - ✅ **Navegación por teclado**:
   - Flecha izquierda: diapositiva anterior
   - Flecha derecha o Espacio: siguiente diapositiva
   - F: activar/desactivar pantalla completa
 - ✅ **Expresiones matemáticas** con MathJax
-- ✅ **Modo oscuro** automático (según preferencias del sistema)
+- ✅ **Modo oscuro/claro** con preferencia del sistema y manual
 - ✅ **Diseño responsivo** (escritorio, tablet, móvil)
 - ✅ **Código limpio** y bien documentado
 
@@ -27,10 +32,50 @@ Una aplicación web moderna y educativa para presentaciones de diapositivas con 
 ├── styles.css          # Estilos CSS con variables personalizables
 ├── app.js              # Lógica JavaScript de la aplicación
 ├── slides-data.js      # Datos de las diapositivas
+├── logo.png            # Logo del colegio (opcional)
 └── README.md           # Esta documentación
 ```
 
-## 🎨 Personalización de Colores
+## 🎨 Personalización
+
+### Cambiar Nombre del Colegio
+
+En el archivo `app.js`, busca la línea en el método `renderSlide()` que dice:
+```html
+<h3>Nombre del Colegio</h3>
+```
+
+Reemplázala con el nombre de tu institución:
+```html
+<h3>Instituto Educativo XYZ</h3>
+```
+
+### Cambiar Nombre del Curso
+
+En el archivo `slides-data.js`, modifica la propiedad `course` de cada diapositiva:
+
+```javascript
+{
+    id: 1,
+    type: "title",
+    title: "Fundamentos de Matemáticas",
+    subtitle: "Conceptos Esenciales y Aplicaciones",
+    author: "Presentación Educativa",
+    description: "Una exploración completa de los principios fundamentales de la matemática",
+    course: "11° Grado"  // Cambia este valor
+}
+```
+
+### Agregar Logo del Colegio
+
+1. Coloca tu imagen de logo en la misma carpeta que `index.html`
+2. Asegúrate de que se llame `logo.png` o actualiza el nombre en `app.js`
+3. El logo debe ser una imagen cuadrada para mejor visualización
+4. Tamaño recomendado: 200x200 px mínimo
+
+**Nota:** Si la imagen no se carga, aparecerá un placeholder con la letra "S".
+
+### Personalización de Colores
 
 Los colores se definen como variables CSS en `styles.css`. Para cambiarlos, edita la sección **VARIABLES DE COLOR** al inicio del archivo:
 
@@ -51,7 +96,7 @@ Los colores se definen como variables CSS en `styles.css`. Para cambiarlos, edit
 }
 ```
 
-### Ejemplos de Paletas Recomendadas
+#### Ejemplos de Paletas Recomendadas
 
 **Paleta Corporativa (Azul-Gris):**
 ```css
@@ -80,6 +125,22 @@ Los colores se definen como variables CSS en `styles.css`. Para cambiarlos, edit
 --accent-color: #dc2626;
 ```
 
+## 🌓 Cambio de Tema (Claro/Oscuro)
+
+La aplicación incluye un botón para cambiar entre modo claro y oscuro:
+
+- **Botón de tema**: Ubicado en la barra superior derecha (icono de luna/sol)
+- **Almacenamiento**: La preferencia se guarda en `localStorage`
+- **Detección automática**: Si no hay preferencia guardada, detecta el tema del sistema
+- **Cambio suave**: Las transiciones son animadas para una mejor experiencia
+
+### Cómo funciona:
+
+1. Haz clic en el botón de tema (luna/sol) en la esquina superior derecha
+2. El tema cambia automáticamente
+3. Tu preferencia se guarda en el navegador
+4. La próxima vez que abras la presentación, usará tu tema elegido
+
 ## 📝 Editar Diapositivas
 
 Las diapositivas se definen en `slides-data.js`. Cada diapositiva es un objeto en el array `slides`:
@@ -92,6 +153,7 @@ Las diapositivas se definen en `slides-data.js`. Cada diapositiva es un objeto e
     type: "content",          // "content" o "title"
     title: "Título",
     subtitle: "Subtítulo",
+    course: "10° Grado",       // Nombre del curso
     content: `
         <p>Contenido en HTML...</p>
         <div class="math-block">
@@ -109,6 +171,7 @@ Las diapositivas se definen en `slides-data.js`. Cada diapositiva es un objeto e
     type: "content",
     title: "Nuevo Tema",
     subtitle: "Descripción del tema",
+    course: "10° Grado",
     content: `
         <p>Este es el contenido de mi diapositiva.</p>
         
@@ -163,6 +226,7 @@ Para más información, visita [MathJax Documentation](https://docs.mathjax.org/
 |--------|--------|
 | Siguiente diapositiva | Botón, Flecha Derecha, Espacio |
 | Diapositiva anterior | Botón, Flecha Izquierda |
+| Cambiar tema | Botón de luna/sol en header |
 | Pantalla completa | Botón, Tecla F |
 | Ver progreso | Barra superior |
 | Ver número actual | Contador inferior |
@@ -177,8 +241,9 @@ Para más información, visita [MathJax Documentation](https://docs.mathjax.org/
 
 1. Abre `index.html` en tu navegador
 2. Usa los botones o el teclado para navegar
-3. Presiona F para pantalla completa
-4. Las expresiones matemáticas se renderizarán automáticamente
+3. Haz clic en el botón de tema para cambiar entre claro/oscuro
+4. Presiona F para pantalla completa
+5. Las expresiones matemáticas se renderizarán automáticamente
 
 ## 📱 Responsividad
 
@@ -186,7 +251,7 @@ La aplicación se adapta automáticamente a diferentes tamaños de pantalla:
 
 - **Escritorio (>1024px):** Diseño completo con márgenes amplios
 - **Tablet (768px-1024px):** Diseño optimizado para pantalla táctil
-- **Móvil (<768px):** Interfaz compacta, botones grandes
+- **Móvil (<768px):** Interfaz compacta, botones grandes, header simplificado
 
 ## 🔧 Arquitectura
 
@@ -200,12 +265,13 @@ La aplicación se adapta automáticamente a diferentes tamaños de pantalla:
 - **Metodología BEM** para nombres de clases
 - **Media queries** para responsive
 - **Animaciones** suaves con transiciones CSS
-- **Modo oscuro** automático
+- **Modo oscuro** manual y automático
 
 ### JavaScript (`app.js`)
 - **Clase PresentationApp** con métodos claros
 - **Separación de responsabilidades**
 - **Manejo de eventos** eficiente
+- **Gestión de tema** con localStorage
 - **Documentación en JSDoc**
 
 ### Datos (`slides-data.js`)
@@ -241,6 +307,7 @@ La aplicación se adapta automáticamente a diferentes tamaños de pantalla:
 - Estructura clara de carpetas
 - Variables CSS para temas
 - Datos separados de la lógica
+- Almacenamiento de preferencias
 
 ## 🐛 Resolución de Problemas
 
@@ -254,9 +321,18 @@ La aplicación se adapta automáticamente a diferentes tamaños de pantalla:
 - Limpia el caché del navegador (Ctrl+Shift+Delete)
 - Recarga la página (F5)
 
+### El logo no aparece
+- Verifica que el archivo `logo.png` esté en la misma carpeta que `index.html`
+- Intenta con otro formato de imagen (JPG, SVG)
+- Revisa la consola del navegador para mensajes de error
+
 ### La navegación por teclado no funciona
 - Asegúrate de que el foco esté en la ventana del navegador
 - Algunos navegadores pueden tener restricciones en modo kiosko
+
+### El tema no se guarda
+- Verifica que localStorage esté habilitado en tu navegador
+- En navegación privada/incógnita, localStorage puede estar deshabilitado
 
 ## 📄 Licencia
 
@@ -269,4 +345,10 @@ Creado como una herramienta educativa moderna para presentaciones de matemática
 ---
 
 **Última actualización:** 2024
-**Versión:** 1.0
+**Versión:** 2.0
+**Cambios en v2.0:**
+- Agregada sección superior con logo y nombre del colegio
+- Implementado cambio de tema claro/oscuro
+- Mejorada la estructura de las diapositivas
+- Agregado soporte para nombre del curso
+- Optimizado para responsividad mejorada
