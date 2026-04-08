@@ -49,7 +49,7 @@
     --transition: all 0.3s ease;
 }
 
-/* Modo oscuro */
+/* Modo oscuro automático */
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #1f2937;
@@ -60,6 +60,28 @@
         --text-light: #9ca3af;
         --primary-light: #1e40af;
     }
+}
+
+/* Modo oscuro manual */
+html[data-theme="dark"] {
+    --background-color: #1f2937;
+    --surface-color: #111827;
+    --border-color: #374151;
+    --text-color: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --text-light: #9ca3af;
+    --primary-light: #1e40af;
+}
+
+/* Modo claro manual */
+html[data-theme="light"] {
+    --background-color: #ffffff;
+    --surface-color: #f9fafb;
+    --border-color: #e5e7eb;
+    --text-color: #1f2937;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
+    --primary-light: #dbeafe;
 }
 
 /* ============================================
@@ -173,24 +195,85 @@ body {
     height: 100%;
     max-width: 1000px;
     max-height: 600px;
-    padding: var(--spacing-2xl);
+    padding: 0;
     background-color: var(--background-color);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     opacity: 0;
     transform: translateX(50px);
     transition: opacity 0.4s ease, transform 0.4s ease;
     animation: slideInRight 0.5s ease forwards;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .slide.active {
     opacity: 1;
     transform: translateX(0);
     animation: slideInRight 0.5s ease forwards;
+}
+
+/* Sección superior de la diapositiva */
+.slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.slide-header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.slide-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slide-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-school-info h3 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.slide-header-right {
+    text-align: right;
+}
+
+.slide-header-right p {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--text-color);
+    margin: 0;
+}
+
+/* Contenido de la diapositiva */
+.slide-body {
+    flex: 1;
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
 }
 
 .slide.exit-left {
@@ -265,7 +348,29 @@ body {
 .slide.title-slide {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: white;
+}
+
+.slide.title-slide .slide-header {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.slide.title-slide .slide-body {
     justify-content: space-around;
+}
+
+/* Párrafos dentro de diapositivas */
+.slide-content p {
+    margin-bottom: var(--spacing-lg);
+}
+
+.slide-content ul, .slide-content ol {
+    margin-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.slide-content li {
+    margin-bottom: var(--spacing-md);
 }
 
 .slide.title-slide .slide-title {
@@ -282,20 +387,6 @@ body {
 .slide.title-slide .slide-content {
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
-}
-
-/* Párrafos dentro de diapositivas */
-.slide-content p {
-    margin-bottom: var(--spacing-lg);
-}
-
-.slide-content ul, .slide-content ol {
-    margin-left: var(--spacing-xl);
-    margin-bottom: var(--spacing-lg);
-}
-
-.slide-content li {
-    margin-bottom: var(--spacing-md);
 }
 
 /* Fórmulas matemáticas */
@@ -419,8 +510,22 @@ body {
     .slide {
         max-height: none;
         max-width: 100%;
-        padding: var(--spacing-lg);
         border-radius: 0;
+    }
+
+    .slide-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .slide-header-right {
+        text-align: left;
+    }
+
+    .slide-body {
+        padding: var(--spacing-lg);
     }
 
     .slide-title {
@@ -449,8 +554,17 @@ body {
         font-size: var(--font-size-base);
     }
 
-    .slide {
+    .slide-body {
         padding: var(--spacing-md);
+    }
+
+    .slide-header {
+        padding: var(--spacing-sm);
+    }
+
+    .slide-logo {
+        width: 40px;
+        height: 40px;
     }
 
     .slide-title {
